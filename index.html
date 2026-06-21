@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -651,6 +650,152 @@
             border-radius: 6px;
         }
 
+
+        /* Admin Dashboard Styles */
+        .admin-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .admin-table th {
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .admin-table tr:hover {
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px 14px;
+            background: rgba(30, 31, 44, 0.7);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .btn-action-edit {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .btn-action-edit:hover {
+            background: var(--gold);
+            color: var(--darker);
+        }
+
+        .btn-action-delete {
+            background: rgba(224, 124, 76, 0.1);
+            color: #e07c4c;
+            border-color: #e07c4c;
+        }
+
+        .btn-action-delete:hover {
+            background: #e07c4c;
+            color: white;
+        }
+
+        .modal-scrollable {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        @media (max-width: 992px) {
+            .admin-table, .admin-table thead, .admin-table tbody, .admin-table th, .admin-table td, .admin-table tr {
+                display: block;
+            }
+            .admin-table thead {
+                display: none;
+            }
+            .admin-table tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--border-glow);
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.02);
+                padding: 10px;
+            }
+            .admin-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 12px 10px;
+                text-align: right;
+                font-size: 0.85rem;
+            }
+            .admin-table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: var(--gold);
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                float: left;
+                text-align: left;
+                padding-right: 15px;
+            }
+            .admin-table td:last-child {
+                border-bottom: none;
+                justify-content: center;
+                padding-top: 15px;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
             .contact-wrapper { grid-template-columns: 1fr; }
@@ -670,7 +815,7 @@
 <div id="landingPage">
     <div class="hero-bg"></div>
     <div class="particles" id="particles"></div>
-    
+
     <nav class="navbar" id="mainNavbar">
         <div class="logo"><h2><i class="fas fa-shield-alt"></i> GODL SHIELD</h2><p>Premier Asset Custody Since 1989</p></div>
         <div class="nav-links">
@@ -749,10 +894,7 @@
         <input type="password" id="loginPass" placeholder="Access Code">
         <button class="btn-gold" id="doLoginBtn" style="width:100%;">ACCESS VAULT</button>
         <div id="loginError" class="error-msg" style="color:#e07c4c; margin-top:10px;"></div>
-        <div class="login-demo-hint">
-            <strong><i class="fas fa-info-circle"></i> Enter Your Credentials:</strong><br>
-            
-        </div>
+        
         <button id="closeLoginModalBtn" style="background:none; border:none; color:var(--text-muted); margin-top:1rem; cursor:pointer;">Cancel</button>
     </div>
 </div>
@@ -779,15 +921,215 @@
             <div id="paymentsTab" class="tab-content"><div class="glass-panel"><h3 style="color:var(--gold);">PAYMENT HISTORY & LEDGER</h3><div id="paymentHistoryList"></div><div class="info-card" style="margin-top:20px;"><div class="info-label">CURRENT OUTSTANDING</div><div class="info-value" id="outstandingBalance">$250.00</div><button class="btn-gold" style="margin-top:10px; padding:8px 20px;" "><i class="fas fa-credit-card"></i> Pay Now</button></div></div></div>
             <div id="videosTab" class="tab-content"><div class="glass-panel"><h3 style="color:var(--gold);">VAULT SURVEILLANCE ARCHIVES</h3><div class="video-grid" id="videoLibrary"></div><p style="margin-top:15px; font-size:0.7rem; color:var(--text-muted);"><i class="fas fa-lock"></i> Videos are encrypted and only accessible by authorized beneficiaries</p></div></div>
             <div id="documentsTab" class="tab-content"><div class="glass-panel"><h3 style="color:var(--gold);">LEGAL CUSTODY DOCUMENTS</h3><div class="doc-grid" id="docLibrary"></div></div></div>
-            <div id="beneficiariesTab" class="tab-content"><div class="glass-panel"><h3 style="color:var(--gold);">BENEFICIARY & NEXT OF KIN</h3><div class="info-grid"><div class="info-card"><div class="info-label">PRIMARY BENEFICIARY</div><div class="info-value">Anna Williams (Donna)</div></div><div class="info-card"><div class="info-label">SECONDARY BENEFICIARY</div><div class="info-value">Unknown Husband of Anna Williams</div></div><div class="info-card"><div class="info-label">NEXT OF KIN</div><div class="info-value">Ann Mitchell Williams</div></div><div class="info-card"><div class="info-label">FUTURE SPOUSE CLAUSE</div><div class="info-value">Including unknown future spouse</div></div></div><div style="background:rgba(212,175,55,0.05); padding:16px; border-radius:16px; margin-top:15px;"><p><i class="fas fa-gavel"></i> <strong>Legal Mandate:</strong> In the absence of the Depositor, only the Beneficiaries / Next Of Kin has the mandate to claim the consignment with at least two (2) days notification prior to collection.</p></div></div></div>
+            <div id="beneficiariesTab" class="tab-content"><div class="glass-panel"><h3 style="color:var(--gold);">BENEFICIARY & NEXT OF KIN</h3><div class="info-grid"><div class="info-card"><div class="info-label">PRIMARY BENEFICIARY</div><div class="info-value">Tanya Thomas Williams and her unknown husband</div></div><div class="info-card"><div class="info-label">NEXT OF KIN</div><div class="info-value">Ann Mitchell Williams</div></div><div class="info-card"><div class="info-label">FUTURE SPOUSE CLAUSE</div><div class="info-value">Including unknown future spouse</div></div></div><div style="background:rgba(212,175,55,0.05); padding:16px; border-radius:16px; margin-top:15px;"><p><i class="fas fa-gavel"></i> <strong>Legal Mandate:</strong> In the absence of the Depositor, only the Beneficiaries / Next Of Kin has the mandate to claim the consignment with at least two (2) days notification prior to collection.</p></div></div></div>
         </main>
+    </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="adminMain" style="display: none;">
+    <div class="dashboard-wrapper">
+        <aside class="sidebar" id="adminSidebar">
+            <div style="display:flex; justify-content:space-between; padding:28px 20px 24px 24px; border-bottom:1px solid var(--border-glow);">
+                <div><h2 style="font-size:1.3rem; color:var(--gold);"><i class="fas fa-user-shield"></i> GSV ADMIN</h2><p style="font-size:0.7rem; uppercase">Control Panel</p></div>
+                <button class="close-sidebar-btn" id="closeAdminSidebarBtn" style="background:rgba(255,255,255,0.05); border:1px solid var(--border-glow); color:var(--gold); width:36px; height:36px; border-radius:50%; cursor:pointer;"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="sidebar-nav">
+                <ul>
+                    <li class="active"><a onclick="showAdminTab('depositors')"><i class="fas fa-users-cog"></i> DEPOSITOR LIST</a></li>
+                    <li><a id="logoutBtnAdmin"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></li>
+                </ul>
+            </div>
+            <div style="padding:20px; border-top:1px solid rgba(255,255,255,0.05); margin-top:auto;"><i class="fas fa-fingerprint"></i> System Administrator<br><span style="font-size:0.7rem;">Secure Panel v1.0</span></div>
+        </aside>
+        <button class="menu-toggle-open" id="openAdminSidebarBtn"><i class="fas fa-bars"></i> MENU</button>
+        <main class="main-content">
+            <div style="display:flex; justify-content:space-between; margin-bottom:32px; flex-wrap:wrap; gap:15px;">
+                <div><h2>DEPOSITOR MANAGEMENT</h2><span style="color:var(--text-muted);">Manage Client Accounts & Generate Access Portals</span></div>
+                <button class="btn-gold" onclick="openCreateDepositorModal()"><i class="fas fa-user-plus"></i> Add Depositor</button>
+            </div>
+            
+            <!-- STATS PANEL -->
+            <div class="info-grid" style="margin-bottom: 30px;">
+                <div class="info-card">
+                    <div class="info-label">Active Portals</div>
+                    <div class="info-value" id="adminTotalUsers">0</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Total Asset Value (Est.)</div>
+                    <div class="info-value" id="adminTotalAssets">$0</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Last Operation</div>
+                    <div class="info-value">Database Synchronized</div>
+                </div>
+            </div>
+
+            <!-- DEPOSITOR TABLE -->
+            <div class="glass-panel">
+                <h3 style="color:var(--gold); margin-bottom: 15px;"><i class="fas fa-database"></i> Client Directory</h3>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Access Code</th>
+                                <th>Deposit Date</th>
+                                <th>Item Custody</th>
+                                <th>Estimated Value</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminDepositorTableBody">
+                            <!-- Populated by script -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- CREATE/EDIT DEPOSITOR MODAL -->
+<div id="depositorFormModal" class="modal" onclick="if(event.target===this) closeDepositorModal()">
+    <div class="modal-content" style="max-width: 900px;">
+        <h3 id="depositorModalTitle" style="color:var(--gold); margin-bottom:20px;"><i class="fas fa-user-plus"></i> Add New Depositor</h3>
+        <div class="modal-scrollable">
+            <form id="depositorForm">
+                <input type="hidden" id="formDepositorIndex">
+                
+                <h4 style="color:var(--gold); font-size:0.9rem; border-bottom:1px solid rgba(212,175,55,0.2); padding-bottom:5px; margin-bottom:15px;">Login Credentials</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="formName">Depositor Full Name *</label>
+                        <input type="text" id="formName" required placeholder="e.g. William Johnson">
+                    </div>
+                    <div class="form-group">
+                        <label for="formEmail">Email Address (Username) *</label>
+                        <input type="email" id="formEmail" required placeholder="e.g. william.johnson@estate.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="formPass">Access Code *</label>
+                        <div style="display:flex; gap:8px;">
+                            <input type="text" id="formPass" required placeholder="Generate or enter code" style="flex:1;">
+                            <button type="button" class="btn-gold" style="padding:0 12px; border-radius:12px; font-size:0.8rem;" onclick="generateRandomPass()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="color:var(--gold); font-size:0.9rem; border-bottom:1px solid rgba(212,175,55,0.2); padding-bottom:5px; margin-bottom:15px; margin-top:20px;">Asset & Deposit Details</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="formItemDeposit">Item Description</label>
+                        <input type="text" id="formItemDeposit" placeholder="e.g. Mineral Gold and diamond">
+                    </div>
+                    <div class="form-group">
+                        <label for="formContent">Content Details</label>
+                        <input type="text" id="formContent" placeholder="e.g. 9.5 tons of gold and 2 kilos of diamond">
+                    </div>
+                    <div class="form-group">
+                        <label for="formAssetValue">Asset Value</label>
+                        <input type="text" id="formAssetValue" placeholder="e.g. $2,450,000 (1990 valuation)">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="formTransactionCode">Transaction Code</label>
+                        <input type="text" id="formTransactionCode" placeholder="e.g. EB/7988/196/93">
+                    </div>
+                    <div class="form-group">
+                        <label for="formRegistrationNumber">Registration Number</label>
+                        <input type="text" id="formRegistrationNumber" placeholder="e.g. 18394848 - 2261">
+                    </div>
+                    <div class="form-group">
+                        <label for="formDepositDate">Deposit Date</label>
+                        <input type="text" id="formDepositDate" placeholder="e.g. 5th March 1975">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="formMonthlyCharges">Charges Per Month</label>
+                        <input type="text" id="formMonthlyCharges" placeholder="e.g. $250">
+                    </div>
+                    <div class="form-group">
+                        <label for="formDirector">Director / Authorized by</label>
+                        <input type="text" id="formDirector" placeholder="e.g. MR-DAVIS CONOR">
+                    </div>
+                    <div class="form-group">
+                        <label for="formCountry">Country of Origin / Vault Location</label>
+                        <input type="text" id="formCountry" placeholder="e.g. West Africa, Ghana">
+                    </div>
+                </div>
+
+                <h4 style="color:var(--gold); font-size:0.9rem; border-bottom:1px solid rgba(212,175,55,0.2); padding-bottom:5px; margin-bottom:15px; margin-top:20px;">Depositor Profile & Next of Kin</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="formNationality">Nationality</label>
+                        <input type="text" id="formNationality" placeholder="e.g. Native American">
+                    </div>
+                    <div class="form-group">
+                        <label for="formHometown">Hometown / State</label>
+                        <input type="text" id="formHometown" placeholder="e.g. Florida, USA">
+                    </div>
+                    <div class="form-group">
+                        <label for="formOwnerDob">Depositor DOB</label>
+                        <input type="text" id="formOwnerDob" placeholder="e.g. 5th March 1931">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="formBeneficiary">Primary Beneficiary</label>
+                        <input type="text" id="formBeneficiary" placeholder="e.g. Tanya Thomas Williams and husband">
+                    </div>
+                    <div class="form-group">
+                        <label for="formNextOfKin">Next of Kin</label>
+                        <input type="text" id="formNextOfKin" placeholder="e.g. Ann Mitchell Williams">
+                    </div>
+                    <div class="form-group">
+                        <label for="formDateOfDeath">Date of Death (if deceased)</label>
+                        <input type="text" id="formDateOfDeath" placeholder="e.g. 1st January 1995">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="formRemarks">Official Remarks / Clause</label>
+                    <textarea id="formRemarks" rows="3" placeholder="Instructions/clauses for claims..."></textarea>
+                </div>
+            </form>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px; border-top:1px solid rgba(255,255,255,0.05); padding-top:15px;">
+            <button class="btn-outline" onclick="closeDepositorModal()">Cancel</button>
+            <button class="btn-gold" onclick="saveDepositorForm()">Save Depositor</button>
+        </div>
     </div>
 </div>
 
 <div id="videoModal" class="modal" onclick="if(event.target===this) closeVideoModal()"><div class="modal-content"><h3 id="modalVideoTitle" style="color:gold;">Video</h3><video id="modalVideoPlayer" controls style="width:100%;"></video><button onclick="closeVideoModal()" class="btn-outline" style="margin-top:15px;">Close</button></div></div>
 <div id="docModal" class="modal" onclick="if(event.target===this) closeDocModal()"><div class="modal-content"><h3 id="modalDocTitle" style="color:gold;">Document</h3><iframe id="docIframe" style="width:100%; height:500px; border:none;"></iframe><button onclick="closeDocModal()" class="btn-outline" style="margin-top:15px;">Close</button></div></div>
 
-<script>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAk51RwHsIssrUnislSDxptNK2q7ybLtzE",
+        authDomain: "bassit-e094a.firebaseapp.com",
+        projectId: "bassit-e094a",
+        storageBucket: "bassit-e094a.firebasestorage.app",
+        messagingSenderId: "982926503686",
+        appId: "1:982926503686:web:19da06220d1278f5913887"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
     // ========== AUTO-HIDING TOP NAVBAR (3 seconds) ==========
     const navbar = document.getElementById('mainNavbar');
     const revealZone = document.getElementById('navbarRevealZone');
@@ -804,12 +1146,14 @@
     document.addEventListener('touchstart', showNavbar);
     showNavbar();
 
-    // ========== AUTO-HIDING DASHBOARD SIDEBAR (3 seconds) ==========
+    // ========== AUTO-HIDING DASHBOARD SIDEBARS (3 seconds) ==========
     const dashboardSidebar = document.getElementById('dashboardSidebar');
+    const adminSidebar = document.getElementById('adminSidebar');
     const sidebarRevealZone = document.getElementById('sidebarRevealZone');
     const sidebarIndicator = document.getElementById('sidebarIndicator');
     let sidebarHideTimeout;
     let isSidebarVisible = true;
+    let isAdminSidebarVisible = true;
 
     function showSidebar() {
         if (dashboardSidebar && !isSidebarVisible) {
@@ -817,8 +1161,6 @@
             isSidebarVisible = true;
             document.body.classList.remove('sidebar-hidden-body');
             if (sidebarIndicator) sidebarIndicator.classList.remove('visible');
-        } else if (dashboardSidebar && isSidebarVisible) {
-            // Already visible, just reset timer
         }
         resetSidebarTimer();
     }
@@ -832,14 +1174,32 @@
         }
     }
 
+    function showAdminSidebar() {
+        if (adminSidebar && !isAdminSidebarVisible) {
+            adminSidebar.classList.remove('sidebar-hidden');
+            isAdminSidebarVisible = true;
+            document.body.classList.remove('sidebar-hidden-body');
+        }
+    }
+
+    function hideAdminSidebar() {
+        if (adminSidebar && isAdminSidebarVisible) {
+            adminSidebar.classList.add('sidebar-hidden');
+            isAdminSidebarVisible = false;
+            document.body.classList.add('sidebar-hidden-body');
+        }
+    }
+
     function resetSidebarTimer() {
         if (sidebarHideTimeout) clearTimeout(sidebarHideTimeout);
         sidebarHideTimeout = setTimeout(() => {
             hideSidebar();
+            if (window.innerWidth <= 768) {
+                hideAdminSidebar();
+            }
         }, 3000);
     }
 
-    // Show sidebar when hovering over left edge or indicator
     if (sidebarRevealZone) {
         sidebarRevealZone.addEventListener('mouseenter', showSidebar);
         sidebarRevealZone.addEventListener('touchstart', showSidebar);
@@ -852,26 +1212,51 @@
         dashboardSidebar.addEventListener('mouseenter', showSidebar);
         dashboardSidebar.addEventListener('touchstart', showSidebar);
     }
-    
-    // Also show on any click/tap in the main content area
+    if (adminSidebar) {
+        adminSidebar.addEventListener('mouseenter', showAdminSidebar);
+        adminSidebar.addEventListener('touchstart', showAdminSidebar);
+    }
+
     document.addEventListener('click', function(e) {
-        // Don't hide if clicking on sidebar elements
-        if (dashboardSidebar && !dashboardSidebar.contains(e.target)) {
+        if (dashboardSidebar && !dashboardSidebar.contains(e.target) && e.target.id !== 'openSidebarBtn') {
             showSidebar();
         }
+        if (adminSidebar && !adminSidebar.contains(e.target) && e.target.id !== 'openAdminSidebarBtn') {
+            if (window.innerWidth <= 768) {
+                // don't immediately open admin sidebar on random click on mobile
+            }
+        }
     });
-    
-    // Initialize sidebar visible
+
+    // Initialize sidebars
     if (dashboardSidebar) {
         dashboardSidebar.classList.remove('sidebar-hidden');
         isSidebarVisible = true;
-        resetSidebarTimer();
+    }
+    if (adminSidebar) {
+        adminSidebar.classList.remove('sidebar-hidden');
+        isAdminSidebarVisible = true;
+    }
+    resetSidebarTimer();
+
+    // Default mobile state adjustments
+    if (window.innerWidth <= 768) {
+        if (dashboardSidebar) {
+            dashboardSidebar.classList.add('sidebar-hidden');
+            isSidebarVisible = false;
+            document.body.classList.add('sidebar-hidden-body');
+        }
+        if (adminSidebar) {
+            adminSidebar.classList.add('sidebar-hidden');
+            isAdminSidebarVisible = false;
+        }
     }
 
-    // Manual toggle buttons
     const closeSidebarBtn = document.getElementById('closeSidebarBtn');
     const openSidebarBtn = document.getElementById('openSidebarBtn');
-    
+    const closeAdminSidebarBtn = document.getElementById('closeAdminSidebarBtn');
+    const openAdminSidebarBtn = document.getElementById('openAdminSidebarBtn');
+
     if (closeSidebarBtn) {
         closeSidebarBtn.onclick = () => {
             if (dashboardSidebar) {
@@ -883,69 +1268,337 @@
             }
         };
     }
-    
+
     if (openSidebarBtn) {
         openSidebarBtn.onclick = () => {
             showSidebar();
         };
     }
 
-    // Depositor data
-    const depositor = {
-        name: "William Johnson", nationality: "Native American", hometown: "Florida, USA", depositDate: "5th March 1990",
-        itemDeposit: "Mineral Gold and diamond", content: "9.5 tons of gold and 2 kilos of diamond", transactionCode: "EB/7988/196/93",
-        registrationNumber: "18394848 - 2261", monthlyCharges: "$250", beneficiary: "Anna Williams (Donna) and her unknown husband",
-        assetValue: "$2,450,000 (1990 valuation)", properties: "Alluvial gold dust", paymentHistory: "By the next of kin",
-        dateStored: "5th March 1990", nextOfKin: "Ann Mitchell Williams and his unknown future spouse", ownerDob: "5th March 1930",
-        country: "West Africa, Ghana", dateOfDeath: "1st January 1995", director: "MR-DAVIS CONOR",
+    if (closeAdminSidebarBtn) {
+        closeAdminSidebarBtn.onclick = () => {
+            hideAdminSidebar();
+            if (sidebarHideTimeout) clearTimeout(sidebarHideTimeout);
+        };
+    }
+
+    if (openAdminSidebarBtn) {
+        openAdminSidebarBtn.onclick = () => {
+            showAdminSidebar();
+        };
+    }
+
+    // ========== DEPOSITOR DATA STORAGE & DYNAMIC MANAGEMENT ==========
+    const ADMIN_EMAIL = "admin@godlshieldvault.com";
+    const ADMIN_PASS = "AdminShield2026";
+
+    const DEFAULT_DEPOSITOR = {
+        name: "William Johnson",
+        email: "william.johnson@estate.com",
+        pass: "William1975",
+        nationality: "Native American",
+        hometown: "Florida, USA",
+        depositDate: "5th March 1975",
+        purpose: "FOR SAFE KEEPING",
+        itemDeposit: "Mineral Gold and diamond",
+        content: "9.5 tons of gold and 2 kilos of diamond",
+        transactionCode: "EB/7988/196/93",
+        registrationNumber: "18394848 - 2261",
+        monthlyCharges: "$250",
+        beneficiary: "Tanya Thomas Williams and her unknown husband",
+        assetValue: "$1,500,000,000",
+        properties: "Alluvial gold dust & Personal belongings",
+        paymentHistory: "By the next of kin",
+        dateStored: "5th March 1975",
+        nextOfKin: "Ann Mitchell Williams and his unknown future spouse",
+        ownerDob: "5th March 1931",
+        country: "West Africa, Ghana",
+        dateOfDeath: "1st January 1995",
+        director: "MR-DAVIS CONOR",
         remarks: "In the absence of the Depositor, only the Beneficiaries / Next Of Kin has the mandate to claim the consignment at least two (2) days notification prior to the collection and the accumulated charges per month would be calculated and paid on the date of collection."
     };
-    const videoAssets = [{ title: "VAULT ENTRY SURVEILLANCE - 1990", file: "video1.mp4", desc: "Original deposit verification footage" },{ title: "GOLD RESERVE INSPECTION", file: "video2.mp4", desc: "9.5 tons gold & diamond auditing" },{ title: "BENEFICIARY CLAIM PROCEDURE", file: "video3.mp4", desc: "Legal briefing for next of kin" }];
-    const docAssets = [{ title: "CUSTODY AGREEMENT", file: "doc1.pdf", desc: "Original deposit contract signed 1990" },{ title: "BENEFICIARY DECLARATION", file: "doc2.pdf", desc: "Anna Williams legal instrument" },{ title: "ASSET VERIFICATION", file: "doc3.pdf", desc: "Proof of 9.5 tons gold & 2kg diamonds" }];
-    const paymentHistory = [{ date: "Jan 1990 - Dec 2024 (34 years)", amount: "$102,000", status: "Paid by Estate" },{ date: "Jan 2025 - Feb 2026", amount: "$3,500", status: "Pending - Awaiting Beneficiary" }];
 
-    function loadDashboard() {
+    let depositors = [];
+    let currentDepositor = null;
+
+    const videoAssets = [{ title: "VAULT ENTRY SURVEILLANCE - 1975", file: "video1.mp4", desc: "Original deposit verification footage" },{ title: "GOLD RESERVE INSPECTION", file: "video2.mp4", desc: "9.5 tons gold & diamond auditing" },{ title: "BENEFICIARY CLAIM PROCEDURE", file: "video3.mp4", desc: "Legal briefing for next of kin" }];
+    const docAssets = [{ title: "CUSTODY AGREEMENT", file: "doc1.pdf", desc: "Original deposit contract signed 1975" },{ title: "BENEFICIARY DECLARATION", file: "doc2.pdf", desc: "Tanya Thomas Williams legal instrument" },{ title: "ASSET VERIFICATION", file: "doc3.pdf", desc: "Proof of 9.5 tons gold & 2kg diamonds" }];
+    const paymentHistory = [{ date: "Jan 1975 - Dec 2024 (50 years)", amount: "$150,000", status: "Paid by Estate" },{ date: "Jan 2025 - Feb 2026", amount: "$3,500", status: "Pending - Awaiting Beneficiary" }];
+
+    // Synchronize depositors from Firebase Firestore
+    async function syncDepositorsFromFirebase() {
+        try {
+            const querySnapshot = await getDocs(collection(db, "depositors"));
+            let list = [];
+            querySnapshot.forEach((doc) => {
+                list.push({ id: doc.id, ...doc.data() });
+            });
+            
+            if (list.length === 0) {
+                const defaultRef = doc(collection(db, "depositors"));
+                await setDoc(defaultRef, DEFAULT_DEPOSITOR);
+                const firstUser = { id: defaultRef.id, ...DEFAULT_DEPOSITOR };
+                depositors = [firstUser];
+            } else {
+                depositors = list;
+            }
+        } catch (e) {
+            console.error("Firebase fetch error, falling back to LocalStorage: ", e);
+            let local = localStorage.getItem('gsv_depositors');
+            if (local) depositors = JSON.parse(local);
+            else depositors = [{ id: "local_william", ...DEFAULT_DEPOSITOR }];
+        }
+    }
+
+    function loadDashboard(depositor) {
         const fields = [
-            {label:"DEPOSITOR NAME", value:depositor.name},{label:"NATIONALITY", value:depositor.nationality},{label:"HOMETOWN", value:depositor.hometown},
-            {label:"DATE OF DEPOSIT", value:depositor.depositDate},{label:"ITEM DEPOSIT", value:depositor.itemDeposit},{label:"CONTENT", value:depositor.content},
-            {label:"TRANSACTION CODE", value:depositor.transactionCode},{label:"REGISTRATION NUMBER", value:depositor.registrationNumber},{label:"CHARGES PER MONTH", value:depositor.monthlyCharges},
-            {label:"ASSET VALUE (1990)", value:depositor.assetValue},{label:"PROPERTIES", value:depositor.properties},{label:"DATE STORED", value:depositor.dateStored},
-            {label:"COUNTRY OF ORIGIN", value:depositor.country},{label:"OWNER DOB", value:depositor.ownerDob},{label:"DATE OF DEATH", value:depositor.dateOfDeath},
-            {label:"DIRECTOR", value:depositor.director}
+            {label:"DEPOSITOR NAME", value:depositor.name},{label:"NATIONALITY", value:depositor.nationality || "N/A"},{label:"HOMETOWN", value:depositor.hometown || "N/A"},
+            {label:"DATE OF DEPOSIT", value:depositor.depositDate || "N/A"},{label:"PURPOSE", value:depositor.purpose || "N/A"},{label:"ITEM DEPOSIT", value:depositor.itemDeposit || "N/A"},
+            {label:"CONTENT", value:depositor.content || "N/A"},{label:"TRANSACTION CODE", value:depositor.transactionCode || "N/A"},
+            {label:"REGISTRATION NUMBER", value:depositor.registrationNumber || "N/A"},{label:"CHARGES PER MONTH", value:depositor.monthlyCharges || "N/A"},
+            {label:"ASSET VALUE", value:depositor.assetValue || "N/A"},{label:"PROPERTIES", value:depositor.properties || "N/A"},
+            {label:"DATE STORED", value:depositor.dateStored || "N/A"},{label:"COUNTRY OF ORIGIN", value:depositor.country || "N/A"},
+            {label:"OWNER DOB", value:depositor.ownerDob || "N/A"},{label:"DATE OF DEATH", value:depositor.dateOfDeath || "N/A"},
+            {label:"DIRECTOR", value:depositor.director || "N/A"}
         ];
         document.getElementById("dashboardInfo").innerHTML = fields.map(f => `<div class="info-card"><div class="info-label">${f.label}</div><div class="info-value">${f.value}</div></div>`).join('');
-        document.getElementById("remarksText").innerHTML = depositor.remarks;
+        document.getElementById("remarksText").innerHTML = depositor.remarks || "No official remarks on record.";
         document.getElementById("displayClientName").innerHTML = depositor.name;
-        document.getElementById("analyticsValue").innerHTML = "$1,500,000 000 (Current Market Value)";
-        document.getElementById("appreciationValue").innerHTML = "+342% since 1990 (Gold: $385/oz to $1,700/oz)";
-        document.getElementById("outstandingBalance").innerHTML = "$250.00 (Current Month - March 2026)";
+        document.getElementById("analyticsValue").innerHTML = depositor.assetValue + " (Estimated Custody Valuation)";
+        document.getElementById("appreciationValue").innerHTML = "+342% since deposit (Gold: $385/oz to $1,700/oz)";
+        document.getElementById("outstandingBalance").innerHTML = (depositor.monthlyCharges || "$250.00") + " (Current Outstanding)";
+        
+        const beneficiaryCards = document.querySelectorAll('#beneficiariesTab .info-value');
+        if (beneficiaryCards.length >= 3) {
+            beneficiaryCards[0].innerHTML = depositor.beneficiary || "N/A";
+            beneficiaryCards[1].innerHTML = depositor.nextOfKin || "N/A";
+            beneficiaryCards[2].innerHTML = depositor.nextOfKin ? "Associated to next of kin clauses" : "N/A";
+        }
+
         let paymentHtml = paymentHistory.map(p => `<div class="payment-item"><span><strong>${p.date}</strong><br><span style="font-size:0.8rem;">${p.status}</span></span><span style="color:var(--gold);">${p.amount}</span></div>`).join('');
         document.getElementById("paymentHistoryList").innerHTML = paymentHtml;
     }
-    
-    function renderVideoLibrary() { 
-        document.getElementById("videoLibrary").innerHTML = videoAssets.map(v => `<div class="video-card" onclick="openVideoModal('${v.file}','${v.title}')"><div class="video-thumb"><i class="fas fa-play-circle"></i></div><div style="padding:15px;"><strong>${v.title}</strong><p style="font-size:0.7rem; margin-top:5px;">${v.desc}</p><button class="btn-outline" style="margin-top:10px;">PLAY SECURITY FOOTAGE</button></div></div>`).join(''); 
+
+    function renderVideoLibrary() {
+        document.getElementById("videoLibrary").innerHTML = videoAssets.map(v => `<div class="video-card" onclick="openVideoModal('${v.file}','${v.title}')"><div class="video-thumb"><i class="fas fa-play-circle"></i></div><div style="padding:15px;"><strong>${v.title}</strong><p style="font-size:0.7rem; margin-top:5px;">${v.desc}</p><button class="btn-outline" style="margin-top:10px;">PLAY SECURITY FOOTAGE</button></div></div>`).join('');
     }
-    
-    function renderDocLibrary() { 
-        document.getElementById("docLibrary").innerHTML = docAssets.map(d => `<div class="doc-card" onclick="openDocumentModal('${d.file}','${d.title}')"><div class="video-thumb"><i class="fas fa-file-pdf"></i></div><div style="padding:15px;"><strong>${d.title}</strong><p style="font-size:0.7rem; margin-top:5px;">${d.desc}</p><button class="btn-outline" style="margin-top:10px;">VIEW DOCUMENT</button></div></div>`).join(''); 
+
+    function renderDocLibrary() {
+        document.getElementById("docLibrary").innerHTML = docAssets.map(d => `<div class="doc-card" onclick="openDocumentModal('${d.file}','${d.title}')"><div class="video-thumb"><i class="fas fa-file-pdf"></i></div><div style="padding:15px;"><strong>${d.title}</strong><p style="font-size:0.7rem; margin-top:5px;">${d.desc}</p><button class="btn-outline" style="margin-top:10px;">VIEW DOCUMENT</button></div></div>`).join('');
     }
-    
+
     window.openVideoModal = (file,title) => { let m=document.getElementById("videoModal"), v=document.getElementById("modalVideoPlayer"); v.src=file; v.load(); document.getElementById("modalVideoTitle").innerText=title; m.style.display="flex"; v.play().catch(e=>alert(`Video file "${file}" not found. Please ensure video1-3.mp4 are in the same directory.`)); };
     window.closeVideoModal = () => { let m=document.getElementById("videoModal"), v=document.getElementById("modalVideoPlayer"); v.pause(); v.src=""; m.style.display="none"; };
     window.openDocumentModal = (file,title) => { let m=document.getElementById("docModal"), ifr=document.getElementById("docIframe"); ifr.src=file; document.getElementById("modalDocTitle").innerText=title; m.style.display="flex"; ifr.onerror=()=>alert(`Document "${file}" not found. Please ensure doc1-3.pdf are in the same directory.`); };
     window.closeDocModal = () => { document.getElementById("docModal").style.display="none"; document.getElementById("docIframe").src=""; };
     window.switchTab = (tab) => { document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active')); document.getElementById(`${tab}Tab`).classList.add('active'); document.querySelectorAll('.sidebar-nav li').forEach(l=>l.classList.remove('active')); document.querySelector(`li[data-tab="${tab}"]`)?.classList.add('active'); showSidebar(); };
-    function scrollToSection(id) { document.getElementById(id).scrollIntoView({behavior:'smooth'}); showNavbar(); }
-    
+    window.scrollToSection = (id) => { document.getElementById(id).scrollIntoView({behavior:'smooth'}); showNavbar(); };
+
     // Particles
     for(let i=0;i<50;i++){ let p=document.createElement('div'); p.className='particle'; p.style.width=Math.random()*5+2+'px'; p.style.height=p.style.width; p.style.left=Math.random()*100+'%'; p.style.animationDelay=Math.random()*20+'s'; p.style.animationDuration=Math.random()*20+10+'s'; document.querySelector('.particles').appendChild(p); }
-    
-    // Login logic
+
+    // ========== ADMIN CONTROLLER LOGIC ==========
+    window.renderAdminDashboard = () => {
+        document.getElementById("adminTotalUsers").innerText = depositors.length;
+        
+        let totalVal = 0;
+        depositors.forEach(d => {
+            let cleanVal = parseFloat((d.assetValue || "").replace(/[^0-9.]/g, ''));
+            if (!isNaN(cleanVal)) totalVal += cleanVal;
+        });
+        document.getElementById("adminTotalAssets").innerText = depositors.length > 1 ? "$" + totalVal.toLocaleString() : "$1,500,000,000";
+
+        const tbody = document.getElementById("adminDepositorTableBody");
+        tbody.innerHTML = depositors.map((d, index) => {
+            return `<tr>
+                <td data-label="Name" style="font-weight: bold; color: var(--gold);">${d.name}</td>
+                <td data-label="Email">${d.email}</td>
+                <td data-label="Access Code"><code>${d.pass}</code></td>
+                <td data-label="Deposit Date">${d.depositDate || 'N/A'}</td>
+                <td data-label="Item Custody">${d.itemDeposit || 'N/A'}</td>
+                <td data-label="Estimated Value">${d.assetValue || 'N/A'}</td>
+                <td data-label="Actions">
+                    <div style="display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;">
+                        <button class="btn-action btn-action-edit" onclick="openEditDepositorModal(${index})"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn-action btn-action-delete" onclick="deleteDepositor(${index})"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>`;
+        }).join('');
+    };
+
+    window.generateRandomPass = () => {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let accessCode = "";
+        for(let i = 0; i < 10; i++) {
+            accessCode += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById("formPass").value = accessCode;
+    };
+
+    window.openCreateDepositorModal = () => {
+        document.getElementById("depositorModalTitle").innerHTML = '<i class="fas fa-user-plus"></i> Add New Depositor';
+        document.getElementById("formDepositorIndex").value = "";
+        document.getElementById("depositorForm").reset();
+        generateRandomPass();
+        document.getElementById("depositorFormModal").style.display = "flex";
+    };
+
+    window.openEditDepositorModal = (index) => {
+        const d = depositors[index];
+        document.getElementById("depositorModalTitle").innerHTML = '<i class="fas fa-user-edit"></i> Edit Depositor Profile';
+        document.getElementById("formDepositorIndex").value = index;
+        
+        document.getElementById("formName").value = d.name || "";
+        document.getElementById("formEmail").value = d.email || "";
+        document.getElementById("formPass").value = d.pass || "";
+        document.getElementById("formItemDeposit").value = d.itemDeposit || "";
+        document.getElementById("formContent").value = d.content || "";
+        document.getElementById("formAssetValue").value = d.assetValue || "";
+        document.getElementById("formTransactionCode").value = d.transactionCode || "";
+        document.getElementById("formRegistrationNumber").value = d.registrationNumber || "";
+        document.getElementById("formDepositDate").value = d.depositDate || "";
+        document.getElementById("formMonthlyCharges").value = d.monthlyCharges || "";
+        document.getElementById("formDirector").value = d.director || "";
+        document.getElementById("formCountry").value = d.country || "";
+        document.getElementById("formNationality").value = d.nationality || "";
+        document.getElementById("formHometown").value = d.hometown || "";
+        document.getElementById("formOwnerDob").value = d.ownerDob || "";
+        document.getElementById("formBeneficiary").value = d.beneficiary || "";
+        document.getElementById("formNextOfKin").value = d.nextOfKin || "";
+        document.getElementById("formDateOfDeath").value = d.dateOfDeath || "";
+        document.getElementById("formRemarks").value = d.remarks || "";
+
+        document.getElementById("depositorFormModal").style.display = "flex";
+    };
+
+    window.closeDepositorModal = () => {
+        document.getElementById("depositorFormModal").style.display = "none";
+    };
+
+    window.deleteDepositor = async (index) => {
+        const dObj = depositors[index];
+        if(confirm(`Are you sure you want to permanently delete depositor "${dObj.name}"?`)) {
+            try {
+                if (dObj.id) {
+                    await deleteDoc(doc(db, "depositors", dObj.id));
+                }
+                depositors.splice(index, 1);
+                localStorage.setItem('gsv_depositors', JSON.stringify(depositors));
+                renderAdminDashboard();
+            } catch (e) {
+                console.error("Error deleting from Firebase: ", e);
+                alert("Error deleting: " + e.message);
+            }
+        }
+    };
+
+    window.saveDepositorForm = async () => {
+        const name = document.getElementById("formName").value.trim();
+        const email = document.getElementById("formEmail").value.trim();
+        const pass = document.getElementById("formPass").value.trim();
+
+        if(!name || !email || !pass) {
+            alert("Name, Email, and Access Code are required fields.");
+            return;
+        }
+
+        const indexStr = document.getElementById("formDepositorIndex").value;
+        const newDepositorObj = {
+            name: name,
+            email: email,
+            pass: pass,
+            itemDeposit: document.getElementById("formItemDeposit").value || "",
+            content: document.getElementById("formContent").value || "",
+            assetValue: document.getElementById("formAssetValue").value || "",
+            transactionCode: document.getElementById("formTransactionCode").value || "",
+            registrationNumber: document.getElementById("formRegistrationNumber").value || "",
+            depositDate: document.getElementById("formDepositDate").value || "",
+            monthlyCharges: document.getElementById("formMonthlyCharges").value || "",
+            director: document.getElementById("formDirector").value || "",
+            country: document.getElementById("formCountry").value || "",
+            nationality: document.getElementById("formNationality").value || "",
+            hometown: document.getElementById("formHometown").value || "",
+            ownerDob: document.getElementById("formOwnerDob").value || "",
+            beneficiary: document.getElementById("formBeneficiary").value || "",
+            nextOfKin: document.getElementById("formNextOfKin").value || "",
+            dateOfDeath: document.getElementById("formDateOfDeath").value || "",
+            remarks: document.getElementById("formRemarks").value || ""
+        };
+
+        try {
+            if(indexStr === "") {
+                const newDocRef = doc(collection(db, "depositors"));
+                await setDoc(newDocRef, newDepositorObj);
+                newDepositorObj.id = newDocRef.id;
+                depositors.push(newDepositorObj);
+            } else {
+                const index = parseInt(indexStr);
+                const docId = depositors[index].id;
+                if (docId) {
+                    await setDoc(doc(db, "depositors", docId), newDepositorObj);
+                    newDepositorObj.id = docId;
+                    depositors[index] = newDepositorObj;
+                } else {
+                    const newDocRef = doc(collection(db, "depositors"));
+                    await setDoc(newDocRef, newDepositorObj);
+                    newDepositorObj.id = newDocRef.id;
+                    depositors[index] = newDepositorObj;
+                }
+            }
+            localStorage.setItem('gsv_depositors', JSON.stringify(depositors));
+        } catch (e) {
+            console.error("Error writing to Firebase: ", e);
+            alert("Error writing to Firebase: " + e.message);
+        }
+
+        closeDepositorModal();
+        renderAdminDashboard();
+    };
+
+    window.showAdminTab = (tab) => {
+        // structural admin tab management
+    };
+
+    // ========== LOGIN & LOGOUT LOGIC (UPDATED) ==========
     document.getElementById("showLoginBtn").onclick = () => { document.getElementById("loginOverlay").style.display = "flex"; document.getElementById("loginUser").value = ''; document.getElementById("loginPass").value = ''; document.getElementById("loginError").innerText = ''; };
     document.getElementById("closeLoginModalBtn").onclick = () => { document.getElementById("loginOverlay").style.display = "none"; };
-    document.getElementById("doLoginBtn").onclick = () => { let email = document.getElementById("loginUser").value.trim(); let pwd = document.getElementById("loginPass").value; if(email === "william.johnson@estate.com" && pwd === "William1990"){ document.getElementById("loginOverlay").style.display="none"; document.getElementById("landingPage").style.display="none"; document.getElementById("dashboardMain").style.display="block"; loadDashboard(); renderVideoLibrary(); renderDocLibrary(); switchTab('dashboard'); showSidebar(); } else { document.getElementById("loginError").innerText = "Access Denied: Invalid credentials. Use: william.johnson@estate.com / William1990"; } };
+    
+    document.getElementById("doLoginBtn").onclick = () => {
+        let email = document.getElementById("loginUser").value.trim();
+        let pwd = document.getElementById("loginPass").value;
+
+        if(email === ADMIN_EMAIL && pwd === ADMIN_PASS){
+            document.getElementById("loginOverlay").style.display="none";
+            document.getElementById("landingPage").style.display="none";
+            document.getElementById("adminMain").style.display="block";
+            renderAdminDashboard();
+            showAdminSidebar();
+        } else {
+            let matchedUser = depositors.find(d => d.email.toLowerCase() === email.toLowerCase() && d.pass === pwd);
+            if (matchedUser) {
+                currentDepositor = matchedUser;
+                document.getElementById("loginOverlay").style.display="none";
+                document.getElementById("landingPage").style.display="none";
+                document.getElementById("dashboardMain").style.display="block";
+                loadDashboard(matchedUser);
+                renderVideoLibrary();
+                renderDocLibrary();
+                switchTab('dashboard');
+                showSidebar();
+            } else {
+                document.getElementById("loginError").innerText = "Access Denied: Invalid credentials.";
+            }
+        }
+    };
+
     document.getElementById("logoutBtnSidebar").onclick = () => { document.getElementById("dashboardMain").style.display="none"; document.getElementById("landingPage").style.display="block"; document.getElementById("loginOverlay").style.display="flex"; document.getElementById("loginUser").value = ''; document.getElementById("loginPass").value = ''; };
+    document.getElementById("logoutBtnAdmin").onclick = () => { document.getElementById("adminMain").style.display="none"; document.getElementById("landingPage").style.display="block"; document.getElementById("loginOverlay").style.display="flex"; document.getElementById("loginUser").value = ''; document.getElementById("loginPass").value = ''; };
+
+    // Initial database synchronization
+    syncDepositorsFromFirebase().then(() => {
+        console.log("Firebase sync completed.");
+    });
 </script>
 </body>
 </html>
